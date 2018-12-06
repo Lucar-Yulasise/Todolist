@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for list in todo_list_all %}
+        {% if list.status == "1" %}
+            <div style="
+    position: absolute;
+    top: 21%;
+    left: 18%;
+    height: 250px;
+    width: 50%;
+    overflow:hidden;float:right">
+            <span class="list-group-item" style="background-color: #b92c28;height: 20%">重要且紧急
+            </span>
+                <span class="list-group-item" style="background-color: #e4b9c0;height: 80%">
+                    <h4>{{ list.title }}</h4>
+                    {{ list.content }}
+                    {{ list.create_time }}
+                </span>
+        </div>
+        {% endif %}
+        {% if list.status == "2" %}
+           <div style="
+    position: absolute;
+    top: 21%;
+    left: 18%;
+    height: 250px;
+    width: 800px;
+    overflow:hidden;float:right">
+            <span class="list-group-item" style="background-color: #f0ad4e;height: 20%">紧急不重要
+            </span>
+                <span class="list-group-item" style="background-color: #f8efc0;height: 80%">
+                    <h4>{{ list.title }}</h4>
+                    {{ list.content }}
+                    {{ list.create_time }}
+                </span>
+        </div>
+        {% endif %}
+        {% if list.status == "3" %}
+           <div style="
+    position: absolute;
+    top: 21%;
+    left: 18%;
+    height: 250px;
+    width: 800px;
+    overflow:hidden;float:right">
+            <span class="list-group-item" style="background-color: #2b669a;height: 20%">重要不紧急
+            </span>
+                <span class="list-group-item" style="background-color: #b9def0;height: 80%">
+                    <h4>{{ list.title }}</h4>
+                    {{ list.content }}
+                    {{ list.create_time }}
+                </span>
+        </div>
+        {% endif %}
+        {% if list.status == "4" %}
+           <div style="
+    position: absolute;
+    top: 21%;
+    left: 18%;
+    height: 250px;
+    width: 800px;
+    overflow:hidden;float:right">
+            <span class="list-group-item" style="background-color: #4cae4c;height: 20%">不重要不紧急
+            </span>
+                <span class="list-group-item" style="background-color: #c4e3f3;height: 80%">
+                    <h4>{{ list.title }}</h4>
+                    {{ list.content }}
+                    {{ list.create_time }}
+                </span>
+        </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
+

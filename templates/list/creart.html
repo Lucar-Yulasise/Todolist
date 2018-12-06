@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="container">
+         <form  method="post" action="/todo/create/">
+             {% csrf_token %}
+             <input class="input-group" style="height: 40px;
+         width: 80%;" type="text" name="title" value="标题"></span>
+         <div>
+            <select name="status" style="height: 40px">
+                <option value="1">重要且紧急</option>
+                <option value="2">紧急不重要</option>
+                <option value="3">重要不紧急</option>
+                <option value="4">不重要不紧急</option>
+            </select>
+        </div>
+        <textarea class="text-center bg-info" name="content" style="height: 439px;
+    width:80%;
+    margin: 0px;
+    text-align: left;"></textarea>
+             </br><button class="btn" style="margin:0 auto" type="submit">完成</button>
+         </form>
+   </div>
+{% endblock %}

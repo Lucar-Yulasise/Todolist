@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h1>TodoList测试</h1>
+        <div style="position: absolute;
+    top: 10%;
+    left: 88%;">
+             <button class="btn" type="submit" style="float: right"><a href="/todo/create/">添加</a></button>
+        </div>
+        <div style="
+    height: 250px;
+    width: 500px;
+    ">
+            <span class="list-group-item" style="background-color: #b92c28;height: 20%">紧急且重要
+            </span>
+            <div style="
+             height: 98%;
+             width: 500px;
+            overflow: auto">
+                {% if todo_list_all %}
+                    {% for list in todo_list_all %}
+                         {% if list.status == "1" %}
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
+                        <li>
+                            <a href="/todo/tolist?status={{ list.status }}">{{ list.title }} </a>
+                            -------------
+                            <span style="float: contour">{{ list.create_time }}</span>
+                            <div style="float:right; margin: 0px" >
+                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
+                            </div>
+                        </li>
+                          </ul>
+                         {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {{ erro }}
+                {% endif %}
+            </div>
+
+        </div>
+        <div style="
+    position: absolute;
+    top: 21%;
+    left: 55%;
+    height: 250px;
+    width: 500px;
+    overflow:hidden;float:right">
+            <span class="list-group-item" style="background-color: #d58512;height: 20%">紧急不重要
+            </span>
+              <div style="
+             height: 98%;
+             width: 500px;
+            overflow: auto">
+                {% if todo_list_all %}
+                    {% for list in todo_list_all %}
+                         {% if list.status == "2" %}
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
+                        <li>
+                            <a href="/todo/tolist?status={{ list.status }}">{{ list.title }}</a>
+                               -------------
+                            <span style="float: contour">{{ list.create_time }}</span>
+                            <div style="float:right; margin: 0px" >
+                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
+                            </div>
+                        </li>
+                          </ul>
+                         {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {{ erro }}
+                {% endif %}
+            </div>
+        </div>
+        <div style="
+    height: 250px;
+    width: 500px;
+    margin-top: 6%;
+    overflow:hidden;">
+            <span class="list-group-item" style="background-color: #2b669a;height: 20%">重要不紧急
+            </span>
+                <div style="
+             height: 98%;
+             width: 500px;
+            overflow: auto">
+                {% if todo_list_all %}
+                    {% for list in todo_list_all %}
+                         {% if list.status == "3" %}
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
+                        <li>
+                            <a href="/todo/tolist?status={{ list.status }}">{{ list.title }}</a>
+                               -------------
+                            <span style="float: contour">{{ list.create_time }}</span>
+                            <div style="float:right; margin: 0px" >
+                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
+                            </div>
+                        </li>
+                          </ul>
+                         {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {{ erro }}
+                {% endif %}
+            </div>
+        </div>
+        <div style="
+     position: absolute;
+    top: 59%;
+    left: 55%;
+    height: 250px;
+    width: 500px;
+    margin-top: 6%;
+    overflow:hidden;float:right;">
+            <span class="list-group-item" style="background-color: #4cae4c;height: 20%">不紧急不重要
+            </span>
+                <div style="
+             height: 98%;
+             width: 500px;
+            overflow: auto">
+                {% if todo_list_all %}
+                    {% for list in todo_list_all %}
+                         {% if list.status == "4" %}
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
+                        <li>
+                            <a href="/todo/tolist?status={{ list.status }}">{{ list.title }}</a>
+                               -------------
+                            <span style="float: contour">{{ list.create_time }}</span>
+                            <div style="float:right; margin: 0px" >
+                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
+                            </div>
+                        </li>
+                          </ul>
+                         {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {{ erro }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+
+    <script type="application/javascript">
+    (function($){
+    var status = false;
+    $.fn.scrollQ = function(options){
+        var defaults = {
+            line:4,
+            scrollNum:2,
+            scrollTime:1000
+        }
+        var options=jQuery.extend(defaults,options);
+        var _self = this;
+        return this.each(function(){
+            $("li",this).each(function(){
+                $(this).css("display","none");
+            })
+            $("li:lt("+options.line+")",this).each(function(){
+                $(this).css("display","block");
+            })
+            function scroll() {
+                for(i=0;i<options.scrollNum;i++) {
+                    var start=$("li:first",_self);
+                    start.fadeOut(100);
+                    start.css("display","none");
+                    start.appendTo(_self);
+                    $("li:eq("+(options.line-1)+")",_self).each(function(){
+                        $(this).fadeIn(500);
+                        $(this).css("display","block");
+                    })
+                }
+            }
+            var timer;
+            timer = setInterval(scroll,options.scrollTime);
+            _self.bind("mouseover",function(){
+                clearInterval(timer);
+            });
+            _self.bind("mouseout",function(){
+                timer = setInterval(scroll,options.scrollTime);
+            });
+
+        });
+    }
+})(jQuery);
+    </script>
+{% endblock %}
