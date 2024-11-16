@@ -1,66 +1,75 @@
 {% extends "base.html" %}
 {% block content %}
+    <style>
+    .container{
+        display:flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    .inner-container{
+        display: flex;
+        flex-direction: row;
+        height: 70vh;
+        margin: 5pt;
+    }
+    .item{
+        width: 580px;
+        height: 380px;
+        margin: 5pt;
+    }
+    </style>
+
     <div class="container">
-        <h1>TodoList测试</h1>
-        <div style="position: absolute;
-    top: 10%;
-    left: 88%;">
-             <button class="btn" type="submit" style="float: right"><a href="/todo/create/">添加</a></button>
-        </div>
-        <div style="
-    height: 250px;
-    width: 500px;
-    ">
-            <span class="list-group-item" style="background-color: #b92c28;height: 20%">紧急且重要
+        <div class="inner-container">
+
+            <div style="position: absolute;
+                                top: 6%;
+                                left: 88%;">
+                <button class="btn" type="submit" style="float: right"><a href="/todo/create/">添加</a></button>
+            </div>
+
+            <div class="item">
+            <span class="list-group-item" style="background-color: #b92c28;height: 10%">紧急且重要
             </span>
-            <div style="
-             height: 98%;
-             width: 500px;
-            overflow: auto">
-                {% if todo_list_all %}
+
+                <div>
+                     {% if todo_list_all %}
                     {% for list in todo_list_all %}
                          {% if list.status == "1" %}
-                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
-                        <li>
-                            <a href="/todo/tolist?status={{ list.status }}">{{ list.title }} </a>
-                            -------------
-                            <span style="float: contour">{{ list.create_time }}</span>
-                            <div style="float:right; margin: 0px" >
-                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
-                            </div>
-                        </li>
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 30%">
+                                <li>
+                                    <a href="/todo/tolist?status={{ list.status }}">{{ list.title }} </a>
+                                    -------------
+                                    <span style="float: contour">{{ list.create_time }}</span>
+                                    <div style="float:right;" >
+                                    <a href="/todo/delete?id={{ list.id }}"><button class="button" align="right">删除</button></a>
+                                    </div>
+                                </li>
                           </ul>
                          {% endif %}
                     {% endfor %}
                 {% else %}
                     {{ erro }}
                 {% endif %}
-            </div>
 
-        </div>
-        <div style="
-    position: absolute;
-    top: 21%;
-    left: 55%;
-    height: 250px;
-    width: 500px;
-    overflow:hidden;float:right">
-            <span class="list-group-item" style="background-color: #d58512;height: 20%">紧急不重要
+                </div>
+
+            </div>
+            <div class="item">
+                 <span class="list-group-item" style="background-color: #2b669a;height: 10%">重要不紧急
             </span>
-              <div style="
-             height: 98%;
-             width: 500px;
-            overflow: auto">
+
+                <div>
                 {% if todo_list_all %}
                     {% for list in todo_list_all %}
                          {% if list.status == "2" %}
-                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 30%">
                         <li>
                             <a href="/todo/tolist?status={{ list.status }}">{{ list.title }}</a>
                                -------------
                             <span style="float: contour">{{ list.create_time }}</span>
                             <div style="float:right; margin: 0px" >
-                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
+                            <a href="/todo/delete?id={{ list.id }}"><button type="button" class="button" align="right">删除</button></a>
                             </div>
                         </li>
                           </ul>
@@ -69,29 +78,31 @@
                 {% else %}
                     {{ erro }}
                 {% endif %}
+
+
+
+                </div>
+
             </div>
+
+
         </div>
-        <div style="
-    height: 250px;
-    width: 500px;
-    margin-top: 6%;
-    overflow:hidden;">
-            <span class="list-group-item" style="background-color: #2b669a;height: 20%">重要不紧急
+        <div class="inner-container">
+
+            <div class="item">
+            <span class="list-group-item" style="background-color: #d58512;height: 10%">紧急不重要
             </span>
-                <div style="
-             height: 98%;
-             width: 500px;
-            overflow: auto">
-                {% if todo_list_all %}
+
+                <div>{% if todo_list_all %}
                     {% for list in todo_list_all %}
                          {% if list.status == "3" %}
-                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 30%">
                         <li>
                             <a href="/todo/tolist?status={{ list.status }}">{{ list.title }}</a>
                                -------------
                             <span style="float: contour">{{ list.create_time }}</span>
                             <div style="float:right; margin: 0px" >
-                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
+                            <a href="/todo/delete?id={{ list.id }}"><button type="button" class="button" align="right">删除</button></a>
                             </div>
                         </li>
                           </ul>
@@ -100,32 +111,29 @@
                 {% else %}
                     {{ erro }}
                 {% endif %}
+
+
+                </div>
+
+
+
             </div>
-        </div>
-        <div style="
-     position: absolute;
-    top: 59%;
-    left: 55%;
-    height: 250px;
-    width: 500px;
-    margin-top: 6%;
-    overflow:hidden;float:right;">
-            <span class="list-group-item" style="background-color: #4cae4c;height: 20%">不紧急不重要
+            <div class="item">
+
+                 <span class="list-group-item" style="background-color: #4cae4c;height: 10%">不紧急不重要
             </span>
-                <div style="
-             height: 98%;
-             width: 500px;
-            overflow: auto">
-                {% if todo_list_all %}
+
+                <div>
+                    {% if todo_list_all %}
                     {% for list in todo_list_all %}
                          {% if list.status == "4" %}
-                             <ul class="list-group-item"  id="sItem" style="position:page; height: 20%">
+                             <ul class="list-group-item"  id="sItem" style="position:page; height: 30%">
                         <li>
                             <a href="/todo/tolist?status={{ list.status }}">{{ list.title }}</a>
                                -------------
                             <span style="float: contour">{{ list.create_time }}</span>
                             <div style="float:right; margin: 0px" >
-                            <a href="/todo/delete?id={{ list.id }}"><button class="btn" align="right">删除</button></a>
+                            <a href="/todo/delete?id={{ list.id }}"><button type="button" class="button" align="right">删除</button></a>
                             </div>
                         </li>
                           </ul>
@@ -134,9 +142,13 @@
                 {% else %}
                     {{ erro }}
                 {% endif %}
+                </div>
+
             </div>
+
         </div>
     </div>
+
 {% endblock %}
 
 {% block js %}
